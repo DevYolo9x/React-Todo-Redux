@@ -1,0 +1,17 @@
+- Cài đặt uuid: Tự động tạo id
+--> link https://www.npmjs.com/package/uuid
+--> npm install uuid
+--> Tạo các Mock data (Dữ liệu có sẵn)
+
+--> Cài thư viện lodash thực hiện cho việc lọc
+--> npm i --save lodash 
+
+
+--> Sử dụng setFormData(prevState) để lưu nội dung vào state
+--> khi sử dụng filter(), map() sẽ thay đổi mảng trạng thái ban đầu.
+
++) Sử dụng redux
+->
+
+========> Chạy: npm run build để render ứng dụng
+========> Thư mục build là thư mục render từ source code
