@@ -10,8 +10,10 @@
 --> Sử dụng setFormData(prevState) để lưu nội dung vào state
 --> khi sử dụng filter(), map() sẽ thay đổi mảng trạng thái ban đầu.
 
-+) Sử dụng redux
-->
+//=================================================================================//
++) Sử dụng redux: npm install react-redux
+-> Tạo 1 file redux.js
+-> Import thư viện vào firl redux.js: import { createStore } from 'redux';
 
 ========> Chạy: npm run build để render ứng dụng
 ========> Thư mục build là thư mục render từ source code

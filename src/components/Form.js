@@ -21,12 +21,12 @@ function From(props) {
   }
 
   function handleChange(event) {
-      let {name, value} = event.target;
-      setFormData((prevState) => ({
-        ...prevState,
-        [name]:value
-      }))
-  } 
+    let {name, value} = event.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]:value
+    }));
+  }
 
   function handleSubmit(event) {
     event.preventDefault();

@@ -4,6 +4,7 @@ import Control from './components/Control';
 import Form from './components/Form';
 import List from './components/List';
 import Student from './components/Student';
+import Store from './Redux';
 import { v4 as uuidv4 } from 'uuid';
 import {filter, includes, orderBy as functionOrderBy, remove, reject} from 'lodash';
 
@@ -29,10 +30,7 @@ function App() {
     itemOrigin = filter(itemOrigin, function(item) { 
         return includes(item.name.toLowerCase(), strSearch.toLowerCase());
     });
-  }
-
-  console.log(itemOrigin);
-  
+  }  
 
   // Sử dụng theo cách thông thường
   // if( strSearch.length > 0 ) {
