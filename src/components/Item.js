@@ -1,7 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { actOpenForm } from '../actions';
 
 function Item(props) {
-  const {data, index, onClickDelete, onClickEdit} = props;
+  const {data, index, onClickDelete, onClickEdit, editItem} = props;
+  console.log(data);
   var type = {
     0: 'Basic',
     1: 'Medium',
@@ -42,5 +45,18 @@ function Item(props) {
     </tr>
   );
 }
+// Lấy toàn bộ thông tin state từ component chứa
+const mapStateToProps = state => {
+  return {
+    //isShowForm: state.isShowForm
+  }
+}
 
-export default Item;
+// Thay đổi trạng thái của toggle Form
+// const mapDispatchToProps = (dispatch, props) => {
+//   return {
+    
+//   }
+// }
+
+export default connect(null, null)(Item);

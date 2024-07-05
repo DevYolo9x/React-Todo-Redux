@@ -1,14 +1,17 @@
+import * as types from '../constans/actionTypes'
 let defaultState = false;
+
+console.log(defaultState);
 
 let isShowFormReducer = (state = defaultState, action) => {
     switch(action.type){
-        case 'CLOSE_FORM':
+        case types.CLOSE_FORM:
             state = false;
             return state;
-        case 'OPEN_FORM':
+        case types.OPEN_FORM:
             state = true;
             return state;
-        case 'TOGGLE_FORM':
+        case types.TOGGLE_FORM:
             state = !state;
             return state;
         default:

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { actCloseForm } from '../actions';
 
 function From(props) {
 
-  let {itemSelected} = props;
+  let {itemSelected, isShowForm, formCancle} = props;
 
   let [formData, setFormData] = useState([]);
 
@@ -15,9 +17,7 @@ function From(props) {
   }, [itemSelected]);
 
   function handleCancel() {
-    if( props.onclickCloseForm ) {
-      props.onclickCloseForm()
-    }
+    props.formCancle()
   }
 
   function handleChange(event) {
@@ -39,6 +39,10 @@ function From(props) {
     if( props.onclickHandleSubmit ) {
       props.onclickHandleSubmit(item.id, item)
     }
+  }
+
+  if( isShowForm == false ) {
+    return null;
   }
 
   return (
@@ -87,4 +91,20 @@ function From(props) {
   );
 }
 
-export default From;
+// Lấy toàn bộ thông tin state từ component chứa
+const mapStateToProps = state => {
+  return {
+    isShowForm: state.isShowForm
+  }
+}
+
+// Thay đổi trạng thái của toggle Form
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    formCancle: () => {
+      dispatch(actCloseForm())
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(From);

@@ -4,7 +4,7 @@ import Control from './components/Control';
 import Form from './components/Form';
 import List from './components/List';
 import Student from './components/Student';
-import Store from './Redux';
+import store from './store';
 import { v4 as uuidv4 } from 'uuid';
 import {filter, includes, orderBy as functionOrderBy, remove, reject} from 'lodash';
 
@@ -32,24 +32,13 @@ function App() {
     });
   }  
 
-  // Sử dụng theo cách thông thường
-  // if( strSearch.length > 0 ) {
-  //   Task.forEach((item) => {
-  //     if( item.name.indexOf(strSearch) !== -1 ){
-  //       itemOrigin.push(item);
-  //     }
-  //   });
-  // } else {
-  //   itemOrigin = Task;
-  // }
-
   // Sort - Sử dụng thư viện lodash
   itemOrigin = functionOrderBy(itemOrigin, [orderBy], [orderDir]);
 
   // Tắt/Mở form
   function handleToggleForm(){
-    setIsShowForm(!isShowForm);
-    setItemSelected(null);
+    //setIsShowForm(!isShowForm);
+    //setItemSelected(null);
   }
   
   // Đóng form
@@ -87,16 +76,6 @@ function App() {
   // Thực hiện Tạo/Cập nhật bản ghi
   function handleSubmit(id, item){
     if( id !== '' ) {
-
-      // itemOrigin.forEach((el, key) => {
-      //   if(el.id === id) {
-      //     itemOrigin[key].id = id;
-      //     itemOrigin[key].name = item.name;
-      //     itemOrigin[key].level = item.level;
-      //   }
-      //   setItemOrigin(itemOrigin);
-      // })
-
       itemOrigin = reject(itemOrigin, {id: id});
       itemOrigin.push({id: id, name: item.name, level: item.level});
     } else {
@@ -109,41 +88,24 @@ function App() {
   }
 
   useEffect(() => {
-    // let items = localStorage.getItem('Task');
-    // setItemOrigin(items);
-    // console.log(itemOrigin);
   }, [strSearch, itemSelected]);
-
-  if( isShowForm ) {
-    elForm = <Form onclickCloseForm={handleCloseForm} onclickHandleSubmit={handleSubmit} itemSelected={itemSelected} />
-  }
   
   return (
     <div className="container">
-
-      {/* <Student /> */}
-
-      {/* TITLE : START */}
       <Title />
-      {/* TITLE : END */}
-      {/* CONTROL (SEARCH + SORT + ADD) : START */}
       <Control 
         orderBy={orderBy}
         orderDir={orderDir}
         onclickSort={handleSort}
         onclickSearchForm={handleGoSearchForm}
-        onclickToggleForm={handleToggleForm}
-        isShowForm={isShowForm}
       />
-      {/* CONTROL (SEARCH + SORT + ADD) : END */}
-      {/* FORM : START */}
-      {elForm}
-      {/* FORM : END */}
-      {/* LIST : START */}
+      <Form 
+        onclickHandleSubmit={handleSubmit} 
+        itemSelected={itemSelected} 
+      />
       <List
       onClickDelete={handleDelete}
       onClickEdit={handleEdit}
-      items={itemOrigin}
       />
     </div>
   );
