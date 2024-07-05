@@ -17,7 +17,7 @@ function From(props) {
   }, [itemSelected]);
 
   function handleCancel() {
-    props.formCancle()
+    //props.formCancle()
   }
 
   function handleChange(event) {
@@ -41,7 +41,7 @@ function From(props) {
     }
   }
 
-  if( isShowForm == false ) {
+  if( isShowForm === false ) {
     return null;
   }
 
