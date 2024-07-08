@@ -6,10 +6,8 @@ function ToggleForm(props) {
 
   const {isShowForm, handleToggle} = props;
 
-  console.log(isShowForm);
-
-  let buttonName = isShowForm === true ? 'Open Form' : 'Close Form'
-  let buttonClass = isShowForm === true ? 'btn-info' : 'btn-success'
+  let buttonName = isShowForm === true ? 'Close Form' : 'Open Form'
+  let buttonClass = isShowForm === true ? 'btn-success' : 'btn-info'
   let buttonForm = <button type="button" onClick={toggleForm} className={`btn ${buttonClass} btn-block`}> {buttonName} </button>
 
   function toggleForm() {

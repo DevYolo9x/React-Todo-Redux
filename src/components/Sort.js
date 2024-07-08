@@ -1,12 +1,20 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
+import { connect } from 'react-redux';
+import { actSortForm } from '../actions';
 
 function Search(props) {
   const search = useRef(null);
-  const {orderBy, orderDir, onclickSort} = props;
-  let sortBy = orderBy+' - ' +orderDir;
+  let {sort, sortItems} = props;
+  let [sortType, setSortType] = useState({
+    orderBy: sort.orderBy,
+    orderDir: sort.orderDir,
+  })
+
+  let sortBy = sortType.orderBy+' - '+sortType.orderDir;
 
   function handleSort(orderBy, orderDir) {
-    onclickSort(orderBy, orderDir);
+    props.sortItems({orderBy, orderDir});
+    //sortItems(orderBy, orderDir);
   }
 
   return (
@@ -43,4 +51,20 @@ function Search(props) {
   );
 }
 
-export default Search;
+// Lấy toàn bộ thông tin state từ component chứa
+const mapStateToProps = state => {
+  return {
+    sort: state.sort,
+  }
+}
+
+const mapDispatchToProps = (sortType) => {
+  return {
+    sortItems: (dispatch, sortType) => {
+      console.log(sortType);
+      //dispatch(actSortForm(orderBy, orderDir))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Search);

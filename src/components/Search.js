@@ -1,25 +1,23 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { actSearch } from '../actions';
 
 function Search(props) {
   const searchInput = useRef(null);
-  const [strSearch, setStrSearch] = useState('');
-
-  let {onclickSearchForm} = props;
+  let {onclickSearchForm, goSearch, clearSearch, search} = props;
+  let [strSearch, setStrSearch] = useState(search);
 
   function handleSearch() {
-    onclickSearchForm(searchInput.current.value);
+    props.goSearch(strSearch)
   }
 
   function handleChange(event) {
-    setStrSearch(event.target.value);
+    setStrSearch(event.target.value)
   }
 
   function handleClear() {
-    setStrSearch('');
-    onclickSearchForm('');
-    if (searchInput.current) {
-      searchInput.current.value = '';
-    }
+    props.clearSearch()
+    setStrSearch('')
   }
 
   return (
@@ -46,4 +44,22 @@ function Search(props) {
   );
 }
 
-export default Search;
+const mapStateToProps = state => {
+  return {
+    search: state.search
+  }
+}
+
+// Thay đổi trạng thái của toggle Form
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    goSearch: (search) => {
+      dispatch(actSearch(search))
+    },
+    clearSearch: () => {
+      dispatch(actSearch(''))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Search);

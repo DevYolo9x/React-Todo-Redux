@@ -17,7 +17,7 @@ function From(props) {
   }, [itemSelected]);
 
   function handleCancel() {
-    //props.formCancle()
+    props.formCancle()
   }
 
   function handleChange(event) {
@@ -92,7 +92,7 @@ function From(props) {
 }
 
 // Lấy toàn bộ thông tin state từ component chứa
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     isShowForm: state.isShowForm
   }

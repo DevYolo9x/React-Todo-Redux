@@ -7,7 +7,7 @@ const Store = createStore(
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() // Sử dụng cho devtool để check
   );
 
-Store.dispatch(actToggleForm());
+// Store.dispatch(actToggleForm());
 
 // Subcribe -- Phương thức khi thay đổi lại các giá trị nó sẽ cập nhật lại thông tin qua subcribe
 Store.subscribe(() => {
