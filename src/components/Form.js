@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { actCloseForm } from '../actions';
+import { actCloseForm, actSubmitForm } from '../actions';
 
 function From(props) {
 
-  let {itemSelected, isShowForm, formCancle} = props;
+  let {itemSelected, isShowForm, formCancle, formSubmit} = props;
 
   let [formData, setFormData] = useState([]);
 
@@ -15,6 +15,8 @@ function From(props) {
       task_level: itemSelected ? itemSelected.level : '',
     });
   }, [itemSelected]);
+
+  console.log(itemSelected);
 
   function handleCancel() {
     props.formCancle()
@@ -35,10 +37,7 @@ function From(props) {
       name: formData.task_name,
       level: +formData.task_level,
     }
-    
-    if( props.onclickHandleSubmit ) {
-      props.onclickHandleSubmit(item.id, item)
-    }
+    formSubmit(item)
   }
 
   if( isShowForm === false ) {
@@ -94,7 +93,8 @@ function From(props) {
 // Lấy toàn bộ thông tin state từ component chứa
 const mapStateToProps = (state) => {
   return {
-    isShowForm: state.isShowForm
+    isShowForm: state.isShowForm,
+    itemSelected: state.itemSelected
   }
 }
 
@@ -103,7 +103,11 @@ const mapDispatchToProps = (dispatch, props) => {
   return {
     formCancle: () => {
       dispatch(actCloseForm())
-    }
+    },
+    formSubmit: (item) => {
+      dispatch(actSubmitForm(item))
+      dispatch(actCloseForm())
+    },
   }
 }
 

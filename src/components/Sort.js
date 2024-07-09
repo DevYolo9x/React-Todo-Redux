@@ -2,19 +2,18 @@ import React, { useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import { actSortForm } from '../actions';
 
-function Search(props) {
+function Sort(props) {
+
   const search = useRef(null);
   let {sort, sortItems} = props;
-  let [sortType, setSortType] = useState({
-    orderBy: sort.orderBy,
-    orderDir: sort.orderDir,
-  })
 
-  let sortBy = sortType.orderBy+' - '+sortType.orderDir;
+  let {orderBy, orderDir} = sort
+  
+  let [sortBy, setSortBy] = useState(orderBy+' - '+orderDir)
 
   function handleSort(orderBy, orderDir) {
-    props.sortItems({orderBy, orderDir});
-    //sortItems(orderBy, orderDir);
+    setSortBy(orderBy+' - '+orderDir)
+    props.sortItems(orderBy, orderDir)
   }
 
   return (
@@ -58,13 +57,12 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = (sortType) => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    sortItems: (dispatch, sortType) => {
-      console.log(sortType);
-      //dispatch(actSortForm(orderBy, orderDir))
+    sortItems: (orderBy, orderDir) => {
+      dispatch(actSortForm(orderBy, orderDir))
     }
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Search);
+export default connect(mapStateToProps, mapDispatchToProps)(Sort);

@@ -19,17 +19,9 @@ function Control(props) {
   
   return (
     <div className="row">
-
-      <Search onclickSearchForm={onclickSearchForm} />
-
-      <Sort 
-      onclickSort={onclickSort}
-      orderBy={orderBy}
-      orderDir={orderDir}
-      />
-
+      <Search />
+      <Sort />
       <ToggleForm />
-
     </div>
   );
 }

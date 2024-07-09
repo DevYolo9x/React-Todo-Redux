@@ -32,3 +32,24 @@ export const actSearch = (search) => {
         search
     }
 }
+
+export const actDelete = (id) => {
+    return {
+        'type': types.DELETE,
+        id
+    }
+}
+
+export const actSubmitForm = (item) => {
+    return {
+        'type': types.SUBMIT_FORM,
+        item
+    }
+}
+
+export const actSelectedItem = (item) => {
+    return {
+        'type': types.SELECT_ITEM,
+        item
+    }
+}

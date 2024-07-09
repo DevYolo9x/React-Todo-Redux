@@ -3,3 +3,6 @@ export const OPEN_FORM = 'OPEN_FORM';
 export const TOGGLE_FORM = 'TOGGLE_FORM';
 export const SORT = 'SORT';
 export const CHANGE_SEARCH = 'CHANGE_SEARCH';
+export const DELETE = 'DELETE';
+export const SUBMIT_FORM = 'SUBMIT_FORM';
+export const SELECT_ITEM = 'SELECT_ITEM';

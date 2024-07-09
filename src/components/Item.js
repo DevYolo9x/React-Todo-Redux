@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { actCloseForm, actOpenForm } from '../actions';
+import { actCloseForm, actOpenForm, actDelete, actSelectedItem } from '../actions';
 
 function Item(props) {
-  const {data, index, onClickDelete, onClickEdit, editItem} = props;
+  const {data, index, onClickDelete, onClickEdit, editItem, deleteItem} = props;
   var type = {
     0: 'Basic',
     1: 'Medium',
@@ -17,11 +17,11 @@ function Item(props) {
   }
 
   function handleDelete(id) {
-    onClickDelete(id)
+    deleteItem(id)
   }
   
   function handleEdit(item) {
-    props.editItem()
+    props.editItem(item)
   }
 
   return (
@@ -54,8 +54,12 @@ const mapStateToProps = state => {
 // Thay đổi trạng thái của toggle Form
 const mapDispatchToProps = (dispatch, props) => {
   return {
-    editItem: () => {
+    editItem: (item) => {
       dispatch(actOpenForm())
+      dispatch(actSelectedItem(item))
+    },
+    deleteItem: (id) => {
+      dispatch(actDelete(id))
     }
   }
 }

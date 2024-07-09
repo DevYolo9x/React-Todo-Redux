@@ -1,27 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import {filter, includes} from 'lodash';
 import Item from './Item';
 import items from '../reducers/items';
-import {orderBy as functionOrderBy} from 'lodash';
+import {orderBy as lodashOrderBy } from 'lodash';
 import { actSortForm } from '../actions';
 
 function List(props) {
+
   let {items, onClickDelete, onClickEdit, search, sort} = props;
+  let {orderBy, orderDir} = sort
   let itemPage = <tr><th colSpan={4}>Không có dữ liệu!</th></tr>
-  let [sortType, setSortType] = useState({
-    orderBy: sort.orderBy,
-    orderDir: sort.orderDir,
-  })
+  let itemsOrigin = items !== null ? items : []
+  
+  // Sort - Sử dụng thư viện lodash
+  items = lodashOrderBy(items, [orderBy], [orderDir]);
 
   if( search != '' ) {
     items = filter(items, function(item) { 
         return includes(item.name.toLowerCase(), search.toLowerCase());
     });
   }
-
-  // Sort - Sử dụng thư viện lodash
-  items = functionOrderBy(items, [sortType.orderBy], [sortType.orderDir]);
 
   if( items.length > 0 ) {
       itemPage = items.map((item, index) =>
@@ -33,10 +32,6 @@ function List(props) {
       index={index}
       />
     ) 
-  }
-
-  function handleSort() {
-
   }
 
   return (
@@ -69,14 +64,6 @@ const mapStateToProps = state => {
     items: state.items,
     search: state.search,
     sort: state.sort,
-  }
-}
-
-const mapDispatchToProps = () => {
-  return {
-    handleSort: (dispatch, orderBy, orderDir) => {
-      dispatch(actSortForm(orderBy, orderDir))
-    }
   }
 }
 
