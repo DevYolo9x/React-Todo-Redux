@@ -6,3 +6,4 @@ export const CHANGE_SEARCH = 'CHANGE_SEARCH';
 export const DELETE = 'DELETE';
 export const SUBMIT_FORM = 'SUBMIT_FORM';
 export const SELECT_ITEM = 'SELECT_ITEM';
+export const UN_SELECT_ITEM = 'UN_SELECT_ITEM';

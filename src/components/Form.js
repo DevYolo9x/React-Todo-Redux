@@ -1,20 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
-import { actCloseForm, actSubmitForm } from '../actions';
+import { connect, useSelector } from 'react-redux';
+import { actCloseForm, actSubmitForm, actUnSelectedItem } from '../actions';
 
 function From(props) {
 
-  let {itemSelected, isShowForm, formCancle, formSubmit} = props;
+  let {isShowForm, formCancle, formSubmit, itemSelected} = props;
 
-  let [formData, setFormData] = useState([]);
-
-  useEffect(() => {
-    setFormData({
-      id: (itemSelected ? itemSelected.id:''),
-      task_name: itemSelected ? itemSelected.name : '',
-      task_level: itemSelected ? itemSelected.level : '',
-    });
-  }, [itemSelected]);
+  let [formData, setFormData] = useState(itemSelected);
 
   console.log(itemSelected);
 
@@ -34,8 +26,8 @@ function From(props) {
     event.preventDefault();
     let item = {
       id: formData.id,
-      name: formData.task_name,
-      level: +formData.task_level,
+      name: formData.name,
+      level: +formData.level,
     }
     formSubmit(item)
   }
@@ -43,7 +35,7 @@ function From(props) {
   if( isShowForm === false ) {
     return null;
   }
-
+  
   return (
     <div className="row">
       <div className="col-md-offset-7 col-md-5">
@@ -58,7 +50,6 @@ function From(props) {
               placeholder="Task Name"
               name="task_name"
               onChange={handleChange}
-              defaultValue={formData.task_name}
             />
           </div>
           <div className="form-group">
@@ -70,7 +61,6 @@ function From(props) {
               className="form-control"
               required="required"
               onChange={handleChange}
-              value={formData.task_level}
             >
               Small
               <option value={0}>Basic</option>
@@ -103,6 +93,7 @@ const mapDispatchToProps = (dispatch, props) => {
   return {
     formCancle: () => {
       dispatch(actCloseForm())
+      dispatch(actUnSelectedItem())
     },
     formSubmit: (item) => {
       dispatch(actSubmitForm(item))

@@ -21,7 +21,7 @@ function Item(props) {
   }
   
   function handleEdit(item) {
-    props.editItem(item)
+    editItem(item)
   }
 
   return (
@@ -55,8 +55,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch, props) => {
   return {
     editItem: (item) => {
-      dispatch(actOpenForm())
       dispatch(actSelectedItem(item))
+      dispatch(actOpenForm())
     },
     deleteItem: (id) => {
       dispatch(actDelete(id))

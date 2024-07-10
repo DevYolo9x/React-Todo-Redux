@@ -11,7 +11,7 @@ let appReducer = combineReducers({
     sort,
     items,
     search,
-    itemsSelected,
+    itemsSelected
 });
 
 export default appReducer
