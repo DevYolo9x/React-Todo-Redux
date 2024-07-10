@@ -4,11 +4,17 @@ import { actCloseForm, actSubmitForm, actUnSelectedItem } from '../actions';
 
 function From(props) {
 
-  let {isShowForm, formCancle, formSubmit, itemSelected} = props;
+  let {isShowForm, formCancle, formSubmit, itemsSelected} = props;
 
-  let [formData, setFormData] = useState(itemSelected);
+  let [formData, setFormData] = useState(itemsSelected);
 
-  console.log(itemSelected);
+  useEffect(() => {
+    if (itemsSelected) {
+        setFormData(itemsSelected);
+    }
+  }, [itemsSelected]);
+
+  console.log(formData);
 
   function handleCancel() {
     props.formCancle()
@@ -50,6 +56,7 @@ function From(props) {
               placeholder="Task Name"
               name="task_name"
               onChange={handleChange}
+              defaultValue={formData.name}
             />
           </div>
           <div className="form-group">
@@ -61,6 +68,7 @@ function From(props) {
               className="form-control"
               required="required"
               onChange={handleChange}
+              defaultValue={formData.level}
             >
               Small
               <option value={0}>Basic</option>
@@ -84,7 +92,7 @@ function From(props) {
 const mapStateToProps = (state) => {
   return {
     isShowForm: state.isShowForm,
-    itemSelected: state.itemSelected
+    itemsSelected: state.itemsSelected
   }
 }
 

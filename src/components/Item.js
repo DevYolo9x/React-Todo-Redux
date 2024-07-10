@@ -55,8 +55,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch, props) => {
   return {
     editItem: (item) => {
-      dispatch(actSelectedItem(item))
       dispatch(actOpenForm())
+      dispatch(actSelectedItem(item))
     },
     deleteItem: (id) => {
       dispatch(actDelete(id))
