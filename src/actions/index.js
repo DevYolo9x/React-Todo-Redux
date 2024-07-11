@@ -54,9 +54,8 @@ export const actSelectedItem = (item) => {
     }
 }
 
-export const actUnSelectedItem = (item) => {
+export const actUnSelectedItem = () => {
     return {
         'type': types.UN_SELECT_ITEM,
-        item
     }
 }

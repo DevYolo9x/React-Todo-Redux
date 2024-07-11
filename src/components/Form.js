@@ -14,10 +14,8 @@ function From(props) {
     }
   }, [itemsSelected]);
 
-  console.log(formData);
-
   function handleCancel() {
-    props.formCancle()
+    formCancle()
   }
 
   function handleChange(event) {
@@ -54,7 +52,7 @@ function From(props) {
               type="text"
               className="form-control"
               placeholder="Task Name"
-              name="task_name"
+              name="name"
               onChange={handleChange}
               defaultValue={formData.name}
             />
@@ -64,11 +62,10 @@ function From(props) {
               label
             </label>
             <select
-              name="task_level"
+              name="level"
               className="form-control"
-              required="required"
               onChange={handleChange}
-              defaultValue={formData.level}
+              value={formData.level}
             >
               Small
               <option value={0}>Basic</option>

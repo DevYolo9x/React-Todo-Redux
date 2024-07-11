@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { connect } from 'react-redux';
-import { actToggleForm } from '../actions';
+import { actToggleForm, actUnSelectedItem } from '../actions';
 
 function ToggleForm(props) {
 
@@ -11,7 +11,7 @@ function ToggleForm(props) {
   let buttonForm = <button type="button" onClick={toggleForm} className={`btn ${buttonClass} btn-block`}> {buttonName} </button>
 
   function toggleForm() {
-    props.handleToggle();
+    handleToggle();
   }
 
   return (
@@ -33,6 +33,7 @@ const mapDispatchToProps = (dispatch, props) => {
   return {
     handleToggle: () => {
       dispatch(actToggleForm())
+      dispatch(actUnSelectedItem())
     }
   }
 }

@@ -6,7 +6,7 @@ const itemsSelectedReducer = (state = defaultState, action) => {
         case types.SELECT_ITEM:
             return action.item
         case types.UN_SELECT_ITEM:
-            return state
+            return defaultState
         default:
             return state
     }
